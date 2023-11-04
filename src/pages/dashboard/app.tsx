@@ -39,23 +39,6 @@ export default function GeneralApp() {
     <Page title="General: App">
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={8}>
-            <AppWelcome displayName={user?.displayName} />
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-            <AppFeatured />
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-            <AppWidgetSummary
-              title="Total Active Users"
-              percent={2.6}
-              total={18765}
-              chartColor={theme.palette.primary.main}
-              chartData={[5, 18, 12, 51, 68, 11, 39, 37, 27, 20]}
-            />
-          </Grid>
 
           <Grid item xs={12} md={4}>
             <AppWidgetSummary
@@ -83,35 +66,6 @@ export default function GeneralApp() {
 
           <Grid item xs={12} md={6} lg={8}>
             <AppAreaInstalled />
-          </Grid>
-
-          <Grid item xs={12} lg={8}>
-            <AppNewInvoice />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-            <AppTopRelated />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-            <AppTopInstalledCountries />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-            <AppTopAuthors />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-            <Stack spacing={3}>
-              <AppWidget title="Conversion" total={38566} icon={'eva:person-fill'} chartData={48} />
-              <AppWidget
-                title="Applications"
-                total={55566}
-                icon={'eva:email-fill'}
-                color="warning"
-                chartData={75}
-              />
-            </Stack>
           </Grid>
         </Grid>
       </Container>

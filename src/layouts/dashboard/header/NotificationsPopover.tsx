@@ -58,7 +58,7 @@ export default function NotificationsPopover() {
         onClick={handleOpen}
         sx={{ width: 40, height: 40 }}
       >
-        <Badge badgeContent={totalUnRead} color="error">
+        <Badge color="error">
           <Iconify icon="eva:bell-fill" width={20} height={20} />
         </Badge>
       </IconButtonAnimate>
@@ -97,9 +97,9 @@ export default function NotificationsPopover() {
               </ListSubheader>
             }
           >
-            {notifications.slice(0, 2).map((notification) => (
+            {/* {notifications.slice(0, 2).map((notification) => (
               <NotificationItem key={notification.id} notification={notification} />
-            ))}
+            ))} */}
           </List>
 
           <List
@@ -110,19 +110,13 @@ export default function NotificationsPopover() {
               </ListSubheader>
             }
           >
-            {notifications.slice(2, 5).map((notification) => (
+            {/* {notifications.slice(2, 5).map((notification) => (
               <NotificationItem key={notification.id} notification={notification} />
-            ))}
+            ))} */}
           </List>
         </Scrollbar>
 
         <Divider sx={{ borderStyle: 'dashed' }} />
-
-        <Box sx={{ p: 1 }}>
-          <Button fullWidth disableRipple>
-            View All
-          </Button>
-        </Box>
       </MenuPopover>
     </>
   );
