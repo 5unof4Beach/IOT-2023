@@ -31,4 +31,8 @@ module.exports = withTM({
     //
     MAPBOX: '',
   },
+  experimental: {
+    esmExternals: "loose", // <-- add this
+    serverComponentsExternalPackages: ["mongoose"] // <-- and this
+  },
 });
