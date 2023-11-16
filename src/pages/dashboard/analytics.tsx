@@ -18,6 +18,9 @@ import {
   AnalyticsCurrentSubject,
   AnalyticsConversionRates,
 } from '../../sections/@dashboard/general/analytics';
+import { useDispatch } from 'src/redux/store';
+import { getStepHeart } from 'src/redux/slices/step-heart';
+import { useEffect } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -29,6 +32,11 @@ GeneralAnalytics.getLayout = function getLayout(page: React.ReactElement) {
 
 export default function GeneralAnalytics() {
   const { themeStretch } = useSettings();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getStepHeart());
+  }, [dispatch]);
 
   return (
     <Page title="General: Analytics">
