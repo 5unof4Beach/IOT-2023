@@ -9,4 +9,4 @@ const StepHeartSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.StepHeart || mongoose.model('stephearts', StepHeartSchema);
+export default mongoose.models.stephearts || mongoose.model('stephearts', StepHeartSchema);
