@@ -5,7 +5,7 @@ import { useSnackbar } from 'notistack';
 import { EventInput } from '@fullcalendar/common';
 // form
 import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Box, Stack, Button, Tooltip, TextField, IconButton, DialogActions } from '@mui/material';
 import { LoadingButton, MobileDateTimePicker } from '@mui/lab';
