@@ -7,6 +7,7 @@ const initialState: StepHeartState = {
   isLoading: false,
   error: null,
   stepHeart: [],
+  userData: null,
 };
 
 const slice = createSlice({
@@ -29,6 +30,16 @@ const slice = createSlice({
       const stepHeart = action.payload;
       state.stepHeart = stepHeart;
     },
+
+    updateUserSuccess(state, action) {
+      state.isLoading = false;
+      state.userData = action.payload;
+    },
+
+    getUserSuccess(state, action) {
+      state.isLoading = false;
+      state.userData = action.payload;
+    },
   },
 });
 
@@ -46,6 +57,29 @@ export function getStepHeart() {
     try {
       const response = await axios.get('/api/iot/step-heart');
       dispatch(slice.actions.getStepHeartSuccess(response.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function updateUser(data: any) {
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios.put('/api/iot/user', data);
+      dispatch(slice.actions.updateUserSuccess(response.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+export function getUser(email: string) {
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios.get(`/api/iot/user?email=${email}`);
+      dispatch(slice.actions.getUserSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

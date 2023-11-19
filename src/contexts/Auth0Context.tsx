@@ -107,6 +107,11 @@ function AuthProvider({ children }: AuthProviderProps) {
     initialize();
   }, []);
 
+  const refetchUser = async () => {
+    const user = await auth0Client?.getUser();
+    dispatch({ type: Types.login, payload: { user: user || null } });
+  };
+
   const login = async () => {
     await auth0Client?.loginWithPopup();
     const isAuthenticated = await auth0Client?.isAuthenticated();
@@ -136,6 +141,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         },
         login,
         logout,
+        refetchUser,
       }}
     >
       {children}

@@ -63,4 +63,5 @@ export type Auth0ContextType = {
   method: 'auth0';
   login: () => Promise<void>;
   logout: VoidFunction;
+  refetchUser: VoidFunction;
 };

@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -21,6 +21,9 @@ import {
   RHFTextField,
   RHFUploadAvatar,
 } from '../../../../components/hook-form';
+import { useDispatch, useSelector } from 'src/redux/store';
+import { updateCurrentUser } from 'firebase/auth';
+import { getUser, updateUser } from 'src/redux/slices/step-heart';
 
 // ----------------------------------------------------------------------
 
@@ -28,20 +31,23 @@ type FormValuesProps = {
   displayName: string;
   email: string;
   photoURL: File | any;
-  phoneNumber: string | null;
-  country: string | null;
-  address: string | null;
-  state: string | null;
-  city: string | null;
-  zipCode: string | null;
-  about: string | null;
-  isPublic: boolean;
+  height: number;
+  age: number;
+  weight: number;
+  gender: string;
 };
 
 export default function AccountGeneral() {
   const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
+  const { userData } = useSelector((state) => state.stepHeart);
+  console.log({ userData });
 
-  const { user } = useAuth();
+  const { user, refetchUser } = useAuth();
+
+  useEffect(() => {
+    refetchUser();
+  }, [userData]);
 
   const UpdateUserSchema = Yup.object().shape({
     displayName: Yup.string().required('Name is required'),
@@ -51,14 +57,10 @@ export default function AccountGeneral() {
     displayName: user?.displayName || '',
     email: user?.email || '',
     photoURL: user?.photoURL || '',
-    phoneNumber: user?.phoneNumber || '',
-    country: user?.country || '',
-    address: user?.address || '',
-    state: user?.state || '',
-    city: user?.city || '',
-    zipCode: user?.zipCode || '',
-    about: user?.about || '',
-    isPublic: user?.isPublic || '',
+    age: userData?.age || '',
+    height: userData?.height || '',
+    weight: userData?.weight || '',
+    gender: userData?.gender || '',
   };
 
   const methods = useForm<FormValuesProps>({
@@ -74,7 +76,7 @@ export default function AccountGeneral() {
 
   const onSubmit = async (data: FormValuesProps) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      dispatch(updateUser(data));
       enqueueSnackbar('Update success!');
     } catch (error) {
       console.error(error);
@@ -143,30 +145,27 @@ export default function AccountGeneral() {
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >
-              <RHFTextField name="displayName" label="Name" />
-              <RHFTextField name="email" label="Email Address" />
+              <RHFTextField name="displayName" label="Tên" disabled />
+              <RHFTextField name="email" label="Email" disabled />
 
-              <RHFTextField name="phoneNumber" label="Phone Number" />
-              <RHFTextField name="address" label="Address" />
+              <RHFTextField type="number" name="age" label="Tuổi" />
+              <RHFTextField type="number" name="height" label="Chiều cao" placeholder="(cm)" />
+              <RHFTextField type="number" name="weight" label="Cân nặng" placeholder="(kg)" />
 
-              <RHFSelect name="country" label="Country" placeholder="Country">
+              <RHFSelect name="gender" label="Gender" placeholder="Gender">
                 <option value="" />
-                {countries.map((option) => (
-                  <option key={option.code} value={option.label}>
+                {[
+                  { label: 'Male', value: 'male' },
+                  { label: 'Female', value: 'female' },
+                ].map((option) => (
+                  <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
                 ))}
               </RHFSelect>
-
-              <RHFTextField name="state" label="State/Region" />
-
-              <RHFTextField name="city" label="City" />
-              <RHFTextField name="zipCode" label="Zip/Code" />
             </Box>
 
             <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
-              <RHFTextField name="about" multiline rows={4} label="About" />
-
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 Save Changes
               </LoadingButton>

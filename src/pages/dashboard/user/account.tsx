@@ -1,5 +1,5 @@
 import { capitalCase } from 'change-case';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // @mui
 import { Container, Tab, Box, Tabs } from '@mui/material';
 // routes
@@ -13,15 +13,11 @@ import Layout from '../../../layouts';
 // components
 import Page from '../../../components/Page';
 import Iconify from '../../../components/Iconify';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
 // sections
-import {
-  AccountGeneral,
-  AccountBilling,
-  AccountSocialLinks,
-  AccountNotifications,
-  AccountChangePassword,
-} from '../../../sections/@dashboard/user/account';
+import { AccountGeneral } from '../../../sections/@dashboard/user/account';
+import { useDispatch, useSelector } from 'src/redux/store';
+import { getUser } from 'src/redux/slices/step-heart';
+import useAuth from 'src/hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
@@ -33,55 +29,26 @@ UserAccount.getLayout = function getLayout(page: React.ReactElement) {
 
 export default function UserAccount() {
   const { themeStretch } = useSettings();
-
   const [currentTab, setCurrentTab] = useState('general');
+  const { user } = useAuth();
+  const { userData } = useSelector((state) => state.stepHeart);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser(user?.email));
+  }, []);
 
   const ACCOUNT_TABS = [
     {
       value: 'general',
       icon: <Iconify icon={'ic:round-account-box'} width={20} height={20} />,
-      component: <AccountGeneral />,
-    },
-    {
-      value: 'billing',
-      icon: <Iconify icon={'ic:round-receipt'} width={20} height={20} />,
-      component: (
-        <AccountBilling
-          cards={_userPayment}
-          addressBook={_userAddressBook}
-          invoices={_userInvoices}
-        />
-      ),
-    },
-    {
-      value: 'notifications',
-      icon: <Iconify icon={'eva:bell-fill'} width={20} height={20} />,
-      component: <AccountNotifications />,
-    },
-    {
-      value: 'social_links',
-      icon: <Iconify icon={'eva:share-fill'} width={20} height={20} />,
-      component: <AccountSocialLinks myProfile={_userAbout} />,
-    },
-    {
-      value: 'change_password',
-      icon: <Iconify icon={'ic:round-vpn-key'} width={20} height={20} />,
-      component: <AccountChangePassword />,
+      component: userData && <AccountGeneral />,
     },
   ];
 
   return (
     <Page title="User: Account Settings">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-        <HeaderBreadcrumbs
-          heading="Account"
-          links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
-            { name: 'Account Settings' },
-          ]}
-        />
-
         <Tabs
           value={currentTab}
           scrollButtons="auto"
