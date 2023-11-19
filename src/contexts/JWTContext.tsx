@@ -146,11 +146,6 @@ function AuthProvider({ children }: AuthProviderProps) {
     });
     const { accessToken, user } = response.data;
 
-    const { id, displayName, ...rest } = user;
-    const body = { ...rest, authId: id, name: displayName };
-
-    const CreateResponse = await Axios.post('http://localhost:8081/api/iot/auth', body);
-
     window.localStorage.setItem('accessToken', accessToken);
     dispatch({
       type: Types.Register,

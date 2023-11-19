@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { StepHeartState } from 'src/@types/step-heart';
 import { dispatch } from '../store';
-import Axios from 'axios';
+import axios from 'src/utils/axios';
 
 const initialState: StepHeartState = {
   isLoading: false,
@@ -44,7 +44,7 @@ export function getStepHeart() {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await Axios.get('http://localhost:8081/api/iot/step-heart');
+      const response = await axios.get('/api/iot/step-heart');
       dispatch(slice.actions.getStepHeartSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
