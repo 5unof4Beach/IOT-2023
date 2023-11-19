@@ -103,7 +103,7 @@ export default function RegisterForm() {
           variant="contained"
           loading={isSubmitting}
         >
-          Register
+          Đăng ký
         </LoadingButton>
       </Stack>
     </FormProvider>

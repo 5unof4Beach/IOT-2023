@@ -26,8 +26,8 @@ module.exports = withTM({
     AWS_COGNITO_USER_POOL_ID: '',
     AWS_COGNITO_CLIENT_ID: '',
     // AUTH0 AUTH
-    AUTH0_CLIENT_ID: '',
-    AUTH0_DOMAIN: '',
+    AUTH0_CLIENT_ID: 'k74GKYVGh0ZKXZIe7HuyyyW2zb6FbOCW',
+    AUTH0_DOMAIN: 'dev-kuhu5n7eziex167g.us.auth0.com',
     //
     MAPBOX: '',
   },
