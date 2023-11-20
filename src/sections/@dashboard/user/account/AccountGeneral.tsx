@@ -41,8 +41,6 @@ export default function AccountGeneral() {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.stepHeart);
-  console.log({ userData });
-
   const { user, refetchUser } = useAuth();
 
   useEffect(() => {

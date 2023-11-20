@@ -14,7 +14,7 @@ function getFormattedDate() {
   const day = String(today.getDate()).padStart(2, '0');
   const month = String(today.getMonth() + 1).padStart(2, '0');
   const year = today.getFullYear();
-  
+
   const formattedDate = `${year}-${month}-${day}`;
   return formattedDate;
 }
@@ -34,7 +34,7 @@ const generateDateTimeLabels = () => {
 export default function AnalyticsWebsiteVisits() {
   const { stepHeart } = useSelector((state) => state.stepHeart);
   const today = getFormattedDate();
-  
+
   const filteredData = stepHeart.filter((item: any) => item.updatedAt.includes(today));
   const hourlyData = Array.from({ length: 24 }, (_, index) => ({
     step_count: 0,
@@ -49,7 +49,7 @@ export default function AnalyticsWebsiteVisits() {
     hourlyData[hour].count += 1;
   });
 
-  hourlyData.forEach(hourData => {
+  hourlyData.forEach((hourData) => {
     if (hourData.count > 0) {
       hourData.heart_rate /= hourData.count;
     }
@@ -70,12 +70,12 @@ export default function AnalyticsWebsiteVisits() {
       labels: {
         formatter: function (value: number) {
           return value;
-        }
+        },
       },
     },
     xaxis: {
       type: 'datetime',
-      categories: generateDateTimeLabels().map(date => new Date(`${today} ${date}:00`).getTime()),
+      categories: generateDateTimeLabels().map((date) => new Date(`${today} ${date}:00`).getTime()),
       labels: {
         datetimeUTC: false,
         format: 'HH:mm',
@@ -94,7 +94,6 @@ export default function AnalyticsWebsiteVisits() {
       },
     },
   });
-
 
   const CHART_DATA = [
     {

@@ -136,7 +136,7 @@ function AuthProvider({ children }: AuthProviderProps) {
           id: state?.user?.sub,
           photoURL: state?.user?.picture,
           email: state?.user?.email,
-          displayName: 'Duc Bui',
+          displayName: state?.user?.nickname,
           role: 'admin',
         },
         login,
