@@ -1,5 +1,5 @@
 // @mui
-import { Grid, Container, Typography } from '@mui/material';
+import { Grid, Container } from '@mui/material';
 // hooks
 import useSettings from '../../hooks/useSettings';
 // layouts
@@ -8,19 +8,15 @@ import Layout from '../../layouts';
 import Page from '../../components/Page';
 // sections
 import {
-  AnalyticsTasks,
-  AnalyticsNewsUpdate,
-  AnalyticsOrderTimeline,
-  AnalyticsCurrentVisits,
   AnalyticsWebsiteVisits,
-  AnalyticsTrafficBySite,
-  AnalyticsWidgetSummary,
-  AnalyticsCurrentSubject,
   AnalyticsConversionRates,
 } from '../../sections/@dashboard/general/analytics';
 import { useDispatch } from 'src/redux/store';
 import { getStepHeart } from 'src/redux/slices/step-heart';
 import { useEffect } from 'react';
+import AnalyticsRecommandation from 'src/sections/@dashboard/general/analytics/AnalyticsRecommandation';
+import AnalyticsConsumption from 'src/sections/@dashboard/general/analytics/AnalyticsConsumption';
+import useAuth from 'src/hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
@@ -33,9 +29,10 @@ GeneralAnalytics.getLayout = function getLayout(page: React.ReactElement) {
 export default function GeneralAnalytics() {
   const { themeStretch } = useSettings();
   const dispatch = useDispatch();
+  const { user } = useAuth();
 
   useEffect(() => {
-    dispatch(getStepHeart());
+    dispatch(getStepHeart(user?.email));
   }, [dispatch]);
 
   return (
@@ -45,9 +42,8 @@ export default function GeneralAnalytics() {
           <Grid item xs={12} md={6} lg={8}>
             <AnalyticsWebsiteVisits />
           </Grid>
-
           <Grid item xs={12} md={6} lg={4}>
-            <AnalyticsCurrentVisits />
+            <AnalyticsConsumption />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
@@ -55,7 +51,7 @@ export default function GeneralAnalytics() {
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
-            <AnalyticsCurrentSubject />
+            <AnalyticsRecommandation />
           </Grid>
         </Grid>
       </Container>

@@ -4,6 +4,7 @@ import { Auth0Client } from '@auth0/auth0-spa-js';
 import { ActionMap, AuthState, AuthUser, Auth0ContextType } from '../@types/auth';
 //
 import { AUTH0_API } from '../config';
+import axios from 'src/utils/axios';
 
 // ----------------------------------------------------------------------
 
@@ -37,6 +38,8 @@ type Auth0Actions = ActionMap<Auth0AuthPayload>[keyof ActionMap<Auth0AuthPayload
 const reducer = (state: AuthState, action: Auth0Actions) => {
   if (action.type === Types.init) {
     const { isAuthenticated, user } = action.payload;
+    console.log({ user });
+
     return {
       ...state,
       isAuthenticated,
@@ -84,10 +87,11 @@ function AuthProvider({ children }: AuthProviderProps) {
 
         if (isAuthenticated) {
           const user = await auth0Client.getUser();
+          const response = await axios.get(`/api/iot/user?email=${user?.email}`);
 
           dispatch({
             type: Types.init,
-            payload: { isAuthenticated, user: user || null },
+            payload: { isAuthenticated, user: { ...user, ...response.data } || null },
           });
         } else {
           dispatch({
@@ -109,7 +113,8 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   const refetchUser = async () => {
     const user = await auth0Client?.getUser();
-    dispatch({ type: Types.login, payload: { user: user || null } });
+    const response = await axios.get(`/api/iot/user?email=${user?.email}`);
+    dispatch({ type: Types.login, payload: { ...user, ...response.data } });
   };
 
   const login = async () => {
@@ -138,6 +143,7 @@ function AuthProvider({ children }: AuthProviderProps) {
           email: state?.user?.email,
           displayName: state?.user?.nickname,
           role: 'admin',
+          ...state?.user,
         },
         login,
         logout,

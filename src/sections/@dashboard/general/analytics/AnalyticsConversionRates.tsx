@@ -40,7 +40,7 @@ export default function AnalyticsConversionRates() {
 const today = new Date();
 
 const filteredData = stepHeart.filter((item: any) => {
-  const itemDate = new Date(item.updatedAt);
+  const itemDate = new Date(item.createdAt);
   return itemDate.getMonth() === today.getMonth() && itemDate.getDate() >= 1 && itemDate.getDate() <= 30;
 });
 
@@ -51,7 +51,7 @@ const hourlyData = Array.from({ length: 30 }, () => ({
 }));
 
 filteredData.forEach((item: any) => {
-  const dayOfMonth = new Date(item.updatedAt).getDate() - 1;
+  const dayOfMonth = new Date(item.createdAt).getDate() - 1;
   hourlyData[dayOfMonth].step_count += item.step_count;
   hourlyData[dayOfMonth].heart_rate += item.heart_rate;
   hourlyData[dayOfMonth].count += 1;
@@ -123,7 +123,7 @@ hourlyData.forEach((dayData) => {
 
   return (
     <Card>
-      <CardHeader title="Thống kê tháng" subheader={getFormatDateFollowMonth()} />
+      <CardHeader title="30 ngày qua" subheader={getFormatDateFollowMonth()} />
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
         <ReactApexChart type="line" series={CHART_DATA} options={chartOptions} height={364} />
       </Box>

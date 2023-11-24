@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { StepHeartState } from 'src/@types/step-heart';
 import { dispatch } from '../store';
 import axios from 'src/utils/axios';
+import pureAxios from 'axios';
 
 const initialState: StepHeartState = {
   isLoading: false,
@@ -27,6 +28,7 @@ const slice = createSlice({
 
     // GET stepHeart SSUCCESS
     getStepHeartSuccess(state, action) {
+      state.isLoading = false;
       const stepHeart = action.payload;
       state.stepHeart = stepHeart;
     },
@@ -46,16 +48,11 @@ const slice = createSlice({
 // Reducer
 export default slice.reducer;
 
-// Actions
-// export const { getStepHeartSuccess } = slice.actions;
-
-// ----------------------------------------------------------------------
-
-export function getStepHeart() {
+export function getStepHeart(email: string) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get('/api/iot/step-heart');
+      const response = await axios.get(`/api/iot/step-heart?userId=${email}`);
       dispatch(slice.actions.getStepHeartSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
@@ -81,6 +78,36 @@ export function getUser(email: string) {
       const response = await axios.get(`/api/iot/user?email=${email}`);
       dispatch(slice.actions.getUserSuccess(response.data));
     } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function saveGPTResponse(email: string, prompt: string, key: string) {
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await pureAxios.post(
+        `https://api.openai.com/v1/chat/completions`,
+        {
+          model: 'gpt-3.5-turbo',
+          messages: [
+            {
+              role: 'user',
+              content: prompt,
+            },
+          ],
+        },
+        {
+          headers: { Authorization: `Bearer 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` },
+        }
+      );
+      dispatch(updateUser({ [key]: response.data.choices[0].message.content, email }));
+
+      // const content = 'Test'
+      // dispatch(updateUser({ [key]: content, email }));
+    } catch (error) {
+      console.log(error);
       dispatch(slice.actions.hasError(error));
     }
   };

@@ -15,9 +15,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         break;
       case 'PUT':
         const { email, ...rest } = body;
-        console.log(rest);
-
-        const response = await User.findOneAndUpdate({ email: email }, { $set: rest }, { upsert: true });
+        const response = await User.findOneAndUpdate(
+          { email: email },
+          { $set: rest },
+          { upsert: true, new: true }
+        );
         res.status(200).json(response);
         break;
       case 'GET':

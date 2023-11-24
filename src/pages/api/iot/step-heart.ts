@@ -16,9 +16,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         // res.json(createStepHeart);
         break;
       case 'GET':
-        const allStepHeart = await StepHeart.find();
-        
+        const allStepHeart = await StepHeart.find({ userId: req.query.userId });
+
         res.status(200).json(allStepHeart);
+        break;
+      case 'PUT':
+        const updateResponse = await StepHeart.updateMany({}, { userId: 'duc.bui@starack.net' });
+
+        res.status(200).json(updateResponse);
         break;
     }
   } catch (e) {

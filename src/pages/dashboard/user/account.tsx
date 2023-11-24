@@ -3,12 +3,9 @@ import { useEffect, useState } from 'react';
 // @mui
 import { Container, Tab, Box, Tabs } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
 import useSettings from '../../../hooks/useSettings';
 // _mock_
-import { _userPayment, _userAddressBook, _userInvoices, _userAbout } from '../../../_mock';
-// layouts
 import Layout from '../../../layouts';
 // components
 import Page from '../../../components/Page';

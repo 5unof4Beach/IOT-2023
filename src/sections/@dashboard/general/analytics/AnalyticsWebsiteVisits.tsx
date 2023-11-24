@@ -35,7 +35,7 @@ export default function AnalyticsWebsiteVisits() {
   const { stepHeart } = useSelector((state) => state.stepHeart);
   const today = getFormattedDate();
 
-  const filteredData = stepHeart.filter((item: any) => item.updatedAt.includes(today));
+  const filteredData = stepHeart.filter((item: any) => item.createdAt.includes(today));
   const hourlyData = Array.from({ length: 24 }, (_, index) => ({
     step_count: 0,
     heart_rate: 0,
@@ -43,7 +43,7 @@ export default function AnalyticsWebsiteVisits() {
   }));
 
   filteredData.forEach((item: any) => {
-    const hour = new Date(item.updatedAt).getHours();
+    const hour = new Date(item.createdAt).getHours();
     hourlyData[hour].step_count += item.step_count;
     hourlyData[hour].heart_rate += item.heart_rate;
     hourlyData[hour].count += 1;
