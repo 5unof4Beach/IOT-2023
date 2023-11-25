@@ -99,7 +99,7 @@ export function saveGPTResponse(email: string, prompt: string, key: string) {
           ],
         },
         {
-          headers: { Authorization: `Bearer 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` },
+          headers: { Authorization: `Bearer ${process.env.CHAT_GPT_API_KEY}` },
         }
       );
       dispatch(updateUser({ [key]: response.data.choices[0].message.content, email }));

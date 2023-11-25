@@ -2,7 +2,7 @@
 import { Card, CardHeader, Grid, IconButton, Skeleton, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { log } from 'console';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Iconify from 'src/components/Iconify';
 import useAuth from 'src/hooks/useAuth';
 import { saveGPTResponse } from 'src/redux/slices/step-heart';
@@ -14,6 +14,7 @@ export default function AnalyticsConsumption() {
   const dispatch = useDispatch();
   const { isLoading, userData } = useSelector((state) => state.stepHeart);
   const { user, refetchUser } = useAuth();
+  const [bmi, setBmi] = useState(user?.weight / Math.pow(user?.height / 100, 2));
 
   function Title() {
     return (
@@ -31,8 +32,7 @@ export default function AnalyticsConsumption() {
   }
 
   function handleGetData() {
-    const prompt =
-      'I\'ve walked 1780 steps today, my bmi is 22, how much calories have I burned today. give response in vietnamese with the following format like: "Congrats, you\'ve burned {n} calories" or "Great, {n} calories were burned today" while n is the amount of calories you calculated';
+    const prompt = `Hôm nay tôi đã đi 1200 bước, bmi của tôi là ${bmi}, tôi là ${user?.gender}, cao ${user?.height} cm, nặng {${user?.weight}} kg, ${user?.age} tuổi. Tính sô lượng calo tôi đã đốt. Đưa ra câu trả lời không quá 50 từ, không cần đưa ra công thức tính, luôn phải có số calo tính được.`;
     dispatch(saveGPTResponse(user?.email, prompt, 'consumption_analytics'));
   }
 

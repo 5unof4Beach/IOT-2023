@@ -17,7 +17,7 @@ module.exports = withTM({
         destination: '/dashboard/app/',
         permanent: true,
       },
-    ]
+    ];
   },
   swcMinify: false,
   trailingSlash: true,
@@ -39,9 +39,10 @@ module.exports = withTM({
     AUTH0_DOMAIN: 'dev-kuhu5n7eziex167g.us.auth0.com',
     //
     MAPBOX: '',
+    CHAT_GPT_API_KEY: process.env.CHAT_GPT_API_KEY,
   },
   experimental: {
-    esmExternals: "loose", // <-- add this
-    serverComponentsExternalPackages: ["mongoose"] // <-- and this
+    esmExternals: 'loose', // <-- add this
+    serverComponentsExternalPackages: ['mongoose'], // <-- and this
   },
 });
