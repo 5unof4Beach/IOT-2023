@@ -1,23 +1,16 @@
-import merge from 'lodash/merge';
 // @mui
 import { useTheme, styled } from '@mui/material/styles';
 import { Card, Typography, Box } from '@mui/material';
-// utils
-import { fNumber } from '../../../../utils/formatNumber';
-// theme
-import { ColorSchema } from '../../../../theme/palette';
-// components
 import Iconify from '../../../../components/Iconify';
-import ReactApexChart, { BaseOptionChart } from '../../../../components/chart';
 
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Card)(({ theme }) => ({
   display: 'flex',
   position: 'relative',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   padding: theme.spacing(3),
-  backgroundColor: theme.palette.primary.darker,
+  height: '100%',
 }));
 
 const IconStyle = styled(Iconify)(({ theme }) => ({
@@ -34,52 +27,24 @@ const IconStyle = styled(Iconify)(({ theme }) => ({
 type Props = {
   icon: string;
   title: string;
-  total: number;
-  chartData: number;
-  color?: ColorSchema;
+  text: string;
+  color?: string;
 };
 
-export default function AppWidget({ title, total, icon, color = 'primary', chartData }: Props) {
+export default function AppWidget({ title, text, icon, color = 'primary' }: Props) {
   const theme = useTheme();
-
-  const chartOptions = merge(BaseOptionChart(), {
-    colors: [theme.palette[color].main],
-    chart: { sparkline: { enabled: true } },
-    legend: { show: false },
-    plotOptions: {
-      radialBar: {
-        hollow: { size: '78%' },
-        track: { margin: 0 },
-        dataLabels: {
-          name: { show: false },
-          value: {
-            offsetY: 6,
-            color: theme.palette.common.white,
-            fontSize: theme.typography.subtitle2.fontSize,
-          },
-        },
-      },
-    },
-  });
 
   return (
     <RootStyle
       sx={{
-        bgcolor: theme.palette[color].darker,
+        backgroundColor: color,
       }}
     >
-      <ReactApexChart
-        type="radialBar"
-        series={[chartData]}
-        options={chartOptions}
-        width={86}
-        height={86}
-      />
       <Box sx={{ ml: 3, color: 'common.white' }}>
-        <Typography variant="h4"> {fNumber(total)}</Typography>
-        <Typography variant="body2" sx={{ opacity: 0.72 }}>
+        <Typography variant="h5" sx={{ opacity: 0.72 }}>
           {title}
         </Typography>
+        <Typography variant="body1" fontWeight={500}> {text}</Typography>
       </Box>
       <IconStyle icon={icon} />
     </RootStyle>

@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import { useState } from 'react';
 // form
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Stack, IconButton, InputAdornment, Alert } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -24,7 +24,7 @@ type FormValuesProps = {
 };
 
 export default function RegisterForm() {
-  const { register } = useAuth();
+  // const { register } = useAuth();
 
   const isMountedRef = useIsMountedRef();
 
@@ -45,6 +45,7 @@ export default function RegisterForm() {
   };
 
   const methods = useForm<FormValuesProps>({
+    // @ts-ignore
     resolver: yupResolver(RegisterSchema),
     defaultValues,
   });
@@ -59,7 +60,7 @@ export default function RegisterForm() {
 
   const onSubmit = async (data: FormValuesProps) => {
     try {
-      await register(data.email, data.password, data.firstName, data.lastName);
+      // await register(data.email, data.password, data.firstName, data.lastName);
     } catch (error) {
       console.error(error);
       reset();
@@ -103,7 +104,7 @@ export default function RegisterForm() {
           variant="contained"
           loading={isSubmitting}
         >
-          Register
+          Đăng ký
         </LoadingButton>
       </Stack>
     </FormProvider>

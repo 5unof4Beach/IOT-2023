@@ -4,7 +4,7 @@ import axios from '../utils/axios';
 import { isValidToken, setSession } from '../utils/jwt';
 // @types
 import { ActionMap, AuthState, AuthUser, JWTContextType } from '../@types/auth';
-
+import Axios from 'axios';
 // ----------------------------------------------------------------------
 
 enum Types {
@@ -128,7 +128,6 @@ function AuthProvider({ children }: AuthProviderProps) {
       password,
     });
     const { accessToken, user } = response.data;
-
     setSession(accessToken);
     dispatch({
       type: Types.Login,

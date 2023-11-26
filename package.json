@@ -27,7 +27,7 @@
     "@fullcalendar/react": "^5.10.1",
     "@fullcalendar/timegrid": "^5.10.1",
     "@fullcalendar/timeline": "^5.10.1",
-    "@hookform/resolvers": "^2.8.4",
+    "@hookform/resolvers": "1.3.0",
     "@iconify/react": "^3.1.0",
     "@mui/lab": "^5.0.0-alpha.60",
     "@mui/material": "^5.2.4",
@@ -70,7 +70,7 @@
     "react-copy-to-clipboard": "^5.0.4",
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.4.2",
-    "react-hook-form": "^7.22.2",
+    "react-hook-form": "^7.48.2",
     "react-i18next": "^11.15.1",
     "react-image-lightbox": "^5.1.4",
     "react-lazy-load-image-component": "^1.5.1",
@@ -88,7 +88,7 @@
     "stylis": "^4.0.13",
     "stylis-plugin-rtl": "^2.1.1",
     "worker-loader": "^3.0.8",
-    "yup": "^0.32.11"
+    "yup": "^1.3.2"
   },
   "devDependencies": {
     "@types/autosuggest-highlight": "^3.2.0",
@@ -98,6 +98,7 @@
     "@types/emoji-mart": "^3.0.8",
     "@types/js-cookie": "^3.0.1",
     "@types/jsonwebtoken": "^8.5.6",
+    "@types/lodash": "^4.14.201",
     "@types/node": "^17.0.0",
     "@types/nprogress": "^0.2.0",
     "@types/numeral": "^2.0.2",

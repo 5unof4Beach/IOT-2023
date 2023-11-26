@@ -75,37 +75,15 @@ export default function Register() {
         <RootStyle>
           <HeaderStyle>
             <Logo />
-            {smUp && (
-              <Typography variant="body2" sx={{ mt: { md: -2 } }}>
-                Already have an account? {''}
-                <NextLink href={PATH_AUTH.login} passHref>
-                  <Link variant="subtitle2">Login</Link>
-                </NextLink>
-              </Typography>
-            )}
           </HeaderStyle>
 
-          {mdUp && (
-            <SectionStyle>
-              <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-                Manage the job more effectively with Minimal
-              </Typography>
-              <Image
-                alt="register"
-                src="https://minimal-assets-api.vercel.app/assets/illustrations/illustration_register.png"
-              />
-            </SectionStyle>
-          )}
 
           <Container>
             <ContentStyle>
               <Box sx={{ mb: 5, display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ flexGrow: 1 }}>
                   <Typography variant="h4" gutterBottom>
-                    Get started absolutely free.
-                  </Typography>
-                  <Typography sx={{ color: 'text.secondary' }}>
-                    Free forever. No credit card needed.
+                    Bắt đầu theo dõi sức khỏe của bạn ngay.
                   </Typography>
                 </Box>
                 <Tooltip title={capitalCase(method)}>
@@ -122,26 +100,13 @@ export default function Register() {
 
               <RegisterForm />
 
-              <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
-                By registering, I agree to Minimal&nbsp;
-                <Link underline="always" color="text.primary" href="#">
-                  Terms of Service
-                </Link>
-                {''}and{''}
-                <Link underline="always" color="text.primary" href="#">
-                  Privacy Policy
-                </Link>
-                .
-              </Typography>
 
-              {!smUp && (
                 <Typography variant="body2" sx={{ mt: 3, textAlign: 'center' }}>
-                  Already have an account?{' '}
+                  Bạn đã có tài khoản?{' '}
                   <NextLink href={PATH_AUTH.login} passHref>
-                    <Link variant="subtitle2">Login</Link>
+                    <Link variant="subtitle2">Đăng nhập</Link>
                   </NextLink>
                 </Typography>
-              )}
             </ContentStyle>
           </Container>
         </RootStyle>

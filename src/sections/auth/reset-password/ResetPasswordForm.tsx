@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 // form
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 // @mui
 import { Stack } from '@mui/material';
@@ -29,6 +29,7 @@ export default function ResetPasswordForm({ onSent, onGetEmail }: Props) {
   });
 
   const methods = useForm<FormValuesProps>({
+    // @ts-ignore
     resolver: yupResolver(ResetPasswordSchema),
     defaultValues: { email: 'demo@minimals.cc' },
   });

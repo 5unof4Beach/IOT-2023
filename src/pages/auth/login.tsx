@@ -82,25 +82,20 @@ export default function Login() {
               <Stack direction="row" alignItems="center" sx={{ mb: 5 }}>
                 <Box sx={{ flexGrow: 1 }}>
                   <Typography variant="h4" gutterBottom>
-                    Sign in
+                    Đăng nhập
                   </Typography>
-                  <Typography sx={{ color: 'text.secondary' }}>
-                    Enter your details below.
-                  </Typography>
+                  <Typography sx={{ color: 'text.secondary' }}>Nhập thông tin của bạn</Typography>
                 </Box>
-
               </Stack>
 
               <LoginForm />
 
-              {!smUp && (
-                <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-                  Don’t have an account?{' '}
-                  <NextLink href={PATH_AUTH.register} passHref>
-                    <Link variant="subtitle2">Get started</Link>
-                  </NextLink>
-                </Typography>
-              )}
+              <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+                Chưa có tài khoản?{' '}
+                <NextLink href={PATH_AUTH.register} passHref>
+                  <Link variant="subtitle2">Đăng ký</Link>
+                </NextLink>
+              </Typography>
             </ContentStyle>
           </Container>
         </RootStyle>

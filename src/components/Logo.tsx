@@ -55,7 +55,7 @@ const Logo = forwardRef<any, Props>(({ disabledLink = false, sx }, ref) => {
     return <>{logo}</>;
   }
 
-  return <NextLink href="/">{logo}</NextLink>;
+  return <NextLink href="/dashboard/app/">{logo}</NextLink>;
 });
 
 export default Logo;

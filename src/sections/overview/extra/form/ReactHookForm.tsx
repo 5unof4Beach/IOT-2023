@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 // form
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 // @mui
 import {
@@ -38,6 +38,7 @@ export default function ReactHookForm() {
 
   const methods = useForm<FormValuesProps>({
     mode: 'onTouched',
+    // @ts-ignore
     resolver: yupResolver(FormSchema),
     defaultValues,
   });
