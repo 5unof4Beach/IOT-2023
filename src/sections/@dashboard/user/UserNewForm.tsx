@@ -75,6 +75,7 @@ export default function UserNewForm({ isEdit = false, currentUser }: Props) {
   );
 
   const methods = useForm<FormValuesProps>({
+    // @ts-ignore
     resolver: yupResolver(NewUserSchema),
     defaultValues,
   });

@@ -56,6 +56,7 @@ export default function VerifyCodeForm() {
     formState: { isSubmitting, isValid },
   } = useForm({
     mode: 'onBlur',
+    // @ts-ignore
     resolver: yupResolver(VerifyCodeSchema),
     defaultValues,
   });

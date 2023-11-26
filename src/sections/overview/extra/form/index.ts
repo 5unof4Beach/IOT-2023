@@ -60,11 +60,11 @@ export const FormSchema = Yup.object().shape({
   terms: Yup.boolean().oneOf([true], 'Must Accept Terms and Conditions'),
   photo: Yup.mixed()
     .required('Photo is is required')
-    .test('fileFormat', 'Unsupported Format', (value) => value && FILE_FORMATS.includes(value.type))
+    .test('fileFormat', 'Unsupported Format', (value) => value && FILE_FORMATS.includes((value as any).type))
     .test(
       'fileSize',
       `File must be less than or equal to ${fData(MAX_FILE_SIZE)}`,
-      (value) => value && value.size <= MAX_FILE_SIZE
+      (value) => value && (value as any).size <= MAX_FILE_SIZE
     ),
 });
 

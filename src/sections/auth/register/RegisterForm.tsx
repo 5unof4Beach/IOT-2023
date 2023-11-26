@@ -24,7 +24,7 @@ type FormValuesProps = {
 };
 
 export default function RegisterForm() {
-  const { register } = useAuth();
+  // const { register } = useAuth();
 
   const isMountedRef = useIsMountedRef();
 
@@ -45,6 +45,7 @@ export default function RegisterForm() {
   };
 
   const methods = useForm<FormValuesProps>({
+    // @ts-ignore
     resolver: yupResolver(RegisterSchema),
     defaultValues,
   });
@@ -59,7 +60,7 @@ export default function RegisterForm() {
 
   const onSubmit = async (data: FormValuesProps) => {
     try {
-      await register(data.email, data.password, data.firstName, data.lastName);
+      // await register(data.email, data.password, data.firstName, data.lastName);
     } catch (error) {
       console.error(error);
       reset();

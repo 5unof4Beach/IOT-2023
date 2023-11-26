@@ -43,6 +43,7 @@ export default function LoginForm() {
   };
 
   const methods = useForm<FormValuesProps>({
+    // @ts-ignore
     resolver: yupResolver(LoginSchema),
     defaultValues,
   });

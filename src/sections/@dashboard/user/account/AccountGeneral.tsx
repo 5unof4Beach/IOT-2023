@@ -62,6 +62,7 @@ export default function AccountGeneral() {
   };
 
   const methods = useForm<FormValuesProps>({
+    // @ts-ignore
     resolver: yupResolver(UpdateUserSchema),
     defaultValues,
   });

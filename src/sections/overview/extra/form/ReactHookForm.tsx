@@ -38,6 +38,7 @@ export default function ReactHookForm() {
 
   const methods = useForm<FormValuesProps>({
     mode: 'onTouched',
+    // @ts-ignore
     resolver: yupResolver(FormSchema),
     defaultValues,
   });

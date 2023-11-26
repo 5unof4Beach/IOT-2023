@@ -29,6 +29,7 @@ export default function ResetPasswordForm({ onSent, onGetEmail }: Props) {
   });
 
   const methods = useForm<FormValuesProps>({
+    // @ts-ignore
     resolver: yupResolver(ResetPasswordSchema),
     defaultValues: { email: 'demo@minimals.cc' },
   });
