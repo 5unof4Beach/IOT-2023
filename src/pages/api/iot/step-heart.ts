@@ -9,11 +9,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     switch (req.method) {
       case 'POST':
-        // const createStepHeart = await StepHeart.create([
-        //   { userId: '6545e7e4fd78653b24fa97a7', step_count: 42, heart_rate: 68 },
-        // ]);
-
-        // res.json(createStepHeart);
+        const createStepHeart = await StepHeart.create(req.body);
+        res.json(createStepHeart);
         break;
       case 'GET':
         const allStepHeart = await StepHeart.find({ userId: req.query.userId });
