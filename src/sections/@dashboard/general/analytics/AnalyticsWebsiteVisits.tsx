@@ -11,8 +11,8 @@ import { format, addHours } from 'date-fns';
 function getFormattedDate() {
   const today = new Date();
 
-  const day = String(today.getDate()).padStart(2, '0');
-  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getUTCDate()).padStart(2, '0');
+  const month = String(today.getUTCMonth() + 1).padStart(2, '0');
   const year = today.getFullYear();
 
   const formattedDate = `${year}-${month}-${day}`;
@@ -36,6 +36,7 @@ export default function AnalyticsWebsiteVisits() {
   const today = getFormattedDate();
 
   const filteredData = stepHeart.filter((item: any) => item.createdAt.includes(today));
+  console.log(today);
   const hourlyData = Array.from({ length: 24 }, (_, index) => ({
     step_count: 0,
     heart_rate: 0,

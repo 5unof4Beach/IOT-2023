@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 import AnalyticsRecommandation from 'src/sections/@dashboard/general/analytics/AnalyticsRecommandation';
 import AnalyticsConsumption from 'src/sections/@dashboard/general/analytics/AnalyticsConsumption';
 import useAuth from 'src/hooks/useAuth';
+import useInterval from 'src/hooks/useInterval';
 
 // ----------------------------------------------------------------------
 
@@ -31,9 +32,9 @@ export default function GeneralAnalytics() {
   const dispatch = useDispatch();
   const { user } = useAuth();
 
-  useEffect(() => {
+  useInterval(() => {
     dispatch(getStepHeart(user?.email));
-  }, [dispatch]);
+  }, 10000);
 
   return (
     <Page title="General: Analytics">
